@@ -1,5 +1,6 @@
 from tkinter import *
 
+
 window = Tk()
 photo = PhotoImage(file = 'C:/CookAnalysis/GIF/pic7.gif')
 h = photo.height()

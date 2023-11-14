@@ -15,6 +15,7 @@ for csvFileName in csvFileList :
         #제목만 추출해서 입력
         for col in range(len(header_list)) :
             outSheet.write(rowCount, col, header_list[col])
+            #csv 파일에 데이터를 쓰는 작업
         for row_list in csvReader:
             rowCount += 1
             for col in range(len(row_list)):
