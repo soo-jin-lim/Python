@@ -19,17 +19,3 @@ def login_check(std):
   rs = c.execute(f"select  * from student "
             f"where id={std.id} and pass={std.pw}")
   return rs.fetchone()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
