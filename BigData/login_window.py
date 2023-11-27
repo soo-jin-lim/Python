@@ -6,6 +6,7 @@ import dao_student
 
 dao_student.create_table()
 
+
 def check_data():
     user_id_val = user_id.get()
     password_val = password.get()
