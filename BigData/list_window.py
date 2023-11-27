@@ -18,14 +18,12 @@ def show_list():
     tree.heading("이메일", text="이메일")
     tree.heading("아이디", text="아이디")
 
-    # 데이터베이스에서 회원 데이터를 검색하고 TreeView에 삽입
+
     c.execute("SELECT * FROM users")
     users = c.fetchall()
     for user in users:
-        tree.insert("", "end", values=user[1:5])  # Adjusted to display only name, phone, email, and user_id
+        tree.insert("", "end", values=user[1:5])
 
     tree.pack(padx=10, pady=10)
     list_window.mainloop()
 
-# Uncomment the following line if you want to test the function independently
-# show_list()

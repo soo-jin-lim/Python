@@ -4,7 +4,6 @@ import join_window
 import list_window
 import dao_student
 
-# 데이터베이스 테이블 생성
 dao_student.create_table()
 
 def check_data():
