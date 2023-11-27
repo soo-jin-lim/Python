@@ -45,4 +45,4 @@ def registration(registration_window):
     tk.Entry(registration_window, textvariable=confirm_password_var, show='*').grid(row=6, column=1, padx=10, pady=10)
 
     tk.Button(registration_window, text="가입하기", command=validate_input).grid(row=7, column=0, columnspan=2, pady=10)
-    tk.Button(registration_window, text="최소").grid(row=8, column=0, columnspan=2, pady=10)
+    tk.Button(registration_window, text="닫기").grid(row=7, column=1, columnspan=2, pady=10)
