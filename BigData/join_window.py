@@ -1,5 +1,6 @@
-from tkinter import *
 import tkinter as tk
+from tkinter import StringVar
+import dao_student
 
 def registration(registration_window):
     name_var, phone_var, email_var, id_var, password_var, confirm_password_var = StringVar(), StringVar(), StringVar(), StringVar(), StringVar(), StringVar()
@@ -14,6 +15,9 @@ def registration(registration_window):
 
         if name and phone_number and email and user_id and password and confirm_password:
             if password == confirm_password:
+                # 유효성 검사 통과 시 사용자 정보를 추가
+                new_user = {'name': name, 'phone': phone_number, 'email': email, 'user_id': user_id, 'password': password}
+                dao_student.add_user(new_user)
                 tk.Label(registration_window, text="회원가입 성공", fg="green").grid(row=8, column=0, columnspan=2, pady=10)
             else:
                 tk.Label(registration_window, text="비밀번호가 일치하지 않습니다", fg="red").grid(row=8, column=0, columnspan=2, pady=10)
@@ -42,14 +46,3 @@ def registration(registration_window):
 
     tk.Button(registration_window, text="가입하기", command=validate_input).grid(row=7, column=0, columnspan=2, pady=10)
     tk.Button(registration_window, text="최소").grid(row=8, column=0, columnspan=2, pady=10)
-
-window = Tk()
-
-tk.Label(window, text="ID : ").grid(row=0, column=0, padx=10, pady=10)
-tk.Label(window, text="Password : ").grid(row=1, column=0, padx=10, pady=10)
-tk.Entry(window).grid(row=0, column=1, padx=10, pady=10)
-tk.Entry(window, show='*').grid(row=1, column=1, padx=10, pady=10)
-tk.Button(window, text="Login").grid(row=2, column=1, padx=10, pady=10)
-tk.Button(window, text="회원가입", command=lambda: registration(Toplevel())).grid(row=4, column=2, padx=10, pady=10)
-
-window.mainloop()
