@@ -17,7 +17,7 @@ def show_info_window(selected_user):
     name_entry = tk.Entry(info_window, textvariable=name_var)
     phone_entry = tk.Entry(info_window, textvariable=phone_var)
     email_entry = tk.Entry(info_window, textvariable=email_var)
-    id_entry = tk.Entry(info_window, textvariable=id_var, state='disabled')  # 아이디는 수정 불가능
+    id_entry = tk.Entry(info_window, textvariable=id_var)  # 아이디도 수정 가능으로 변경
 
     name_entry.grid(row=0, column=1, padx=10, pady=10)
     phone_entry.grid(row=1, column=1, padx=10, pady=10)
@@ -60,3 +60,39 @@ def show_info_window(selected_user):
     tk.Button(info_window, text="삭제하기", command=delete_user).grid(row=5, column=0, columnspan=2, pady=10)
 
     info_window.mainloop()
+
+def show_list():
+    conn = sqlite3.connect('user_database.db')
+    c = conn.cursor()
+
+    list_window = tk.Tk()
+    list_window.title("회원 리스트")
+
+    # TreeView 생성
+    tree = ttk.Treeview(list_window)
+    tree["columns"] = ("이름", "폰번호", "이메일", "아이디")
+    tree.heading("#0", text="이름")
+    tree.heading("이름", text="이름")
+    tree.heading("폰번호", text="폰번호")
+    tree.heading("이메일", text="이메일")
+    tree.heading("아이디", text="아이디")
+
+    c.execute("SELECT * FROM users")
+    users = c.fetchall()
+    for user in users:
+        tree.insert("", "end", values=user[1:5])
+
+    tree.pack(padx=10, pady=10)
+
+    # 수정 버튼
+    edit_button = tk.Button(list_window, text="수정", command=lambda: show_info_window(tree.item(tree.selection(), 'values')))
+    edit_button.pack(side=tk.LEFT, padx=10)
+
+    # 삭제 버튼
+    delete_button = tk.Button(list_window, text="삭제", command=lambda: show_info_window(tree.item(tree.selection(), 'values')))
+    delete_button.pack(side=tk.LEFT, padx=10)
+
+    list_window.mainloop()
+
+# show_list 함수 호출
+show_list()
